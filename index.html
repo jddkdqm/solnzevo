@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Студия в Солнцево</title>
+  <meta name="description" content="Светлая студия у метро Солнцево. 4 500 ₽/сутки, до 3 гостей, 15 минут до Внуково, бесконтактное заселение.">
+  <meta name="theme-color" content="#F6F3EE">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Светлая студия у метро Солнцево">
+  <meta property="og:description" content="До 3 гостей · 4 500 ₽/сутки · 7 мин до метро · 15 мин до Внуково · бесконтактное заселение">
+  <meta property="og:image" content="https://pomf2.lain.la/f/6mfnce8p.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f6f3ee;
+      --ink: #1c1a17;
+      --muted: #6a645c;
+      --line: #e3ddd4;
+      --sage: #314039;
+      --on-sage: #f6f3ee;
+      --wa: #25D366;
+      --wa-dark: #1da851;
+      --max: #4B7BEC;
+      --max-dark: #3a66d4;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --header-h: 3.5rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 10% 0%, rgba(232, 224, 210, 0.5) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 70% at 90% 15%, rgba(210, 220, 212, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #f8f5f0 0%, #f6f3ee 45%, #f3efe9 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; }
+    button {
+      font: inherit; color: inherit; background: none; border: 0; padding: 0;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    h1, h2, h3, p { margin: 0; }
+    .serif { font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif; font-weight: 500; }
+    .wrap { width: min(72rem, calc(100% - 2rem)); margin-inline: auto; }
+    .kicker {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .muted { color: var(--muted); }
+
+    /* ——— Header ——— */
+    header.bar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--header-h);
+      isolation: isolate;
+      overflow: hidden;
+    }
+    header.bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(246, 243, 238, 0.9) 0%,
+        rgba(246, 243, 238, 0.65) 55%,
+        rgba(246, 243, 238, 0.35) 100%
+      );
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(227, 221, 212, 0.55);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .bar-row {
+      width: min(72rem, calc(100% - 1.25rem));
+      margin-inline: auto;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.05rem, 4vw, 1.35rem);
+      text-decoration: none;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      line-height: 1;
+      overflow: hidden;
+      max-width: 14rem;
+      opacity: 1;
+      transform: translateX(0);
+      transition:
+        opacity 0.28s ease,
+        transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+        max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+        margin 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform, max-width;
+    }
+
+    .photo-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+      flex: 0 0 0;
+      min-width: 0;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateX(-10px);
+      pointer-events: none;
+      transition:
+        opacity 0.3s ease 0.05s,
+        transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+        max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        flex-basis 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: opacity, transform, max-width;
+    }
+    .photo-menu a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: clamp(0.7rem, 2.6vw, 0.88rem);
+      font-weight: 500;
+      padding: 0.4rem 0.45rem;
+      border-radius: 7px;
+      white-space: nowrap;
+      line-height: 1;
+      flex-shrink: 0;
+      transition: color 0.15s, background 0.15s;
+    }
+    .photo-menu a:hover,
+    .photo-menu a:focus-visible {
+      color: var(--ink);
+      background: rgba(49, 64, 57, 0.08);
+    }
+
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+      flex-shrink: 0;
+      height: 100%;
+    }
+    .nav-right a,
+    .nav-right button {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: clamp(0.82rem, 3vw, 0.92rem);
+      font-weight: 500;
+      white-space: nowrap;
+      padding: 0 0.7rem;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+      line-height: 1;
+      transition: color 0.15s, background 0.15s, opacity 0.28s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), max-width 0.35s ease, padding 0.35s ease;
+      -webkit-tap-highlight-color: transparent;
+      overflow: hidden;
+      max-width: 8rem;
+    }
+    .nav-right a:hover,
+    .nav-right button:hover,
+    .nav-right button.is-active {
+      color: var(--ink);
+    }
+
+    /* Open animations */
+    header.bar.is-open .logo {
+      opacity: 0;
+      transform: translateX(-18px);
+      max-width: 0;
+      margin: 0;
+      pointer-events: none;
+    }
+    header.bar.is-open .photo-menu {
+      flex: 1 1 auto;
+      max-width: 28rem;
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    /* Mobile: secondary links slide out right */
+    @media (max-width: 639px) {
+      header.bar.is-open .terms-link,
+      header.bar.is-open .inside-link {
+        opacity: 0;
+        transform: translateX(20px);
+        max-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        pointer-events: none;
+      }
+    }
+
+    .call {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-height: 2.75rem;
+      padding: 0 1.1rem;
+      background: var(--sage);
+      color: var(--on-sage);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: filter 0.15s ease;
+      line-height: 1;
+    }
+    .call:hover { filter: brightness(1.08); }
+    .call.desktop { display: none; }
+    .call svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
+
+    /* ——— Hero ——— */
+    .hero { padding-top: 0.9rem; }
+    .shot {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+    }
+    .shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      box-shadow: inset 0 0 60px rgba(0,0,0,0.22), inset 0 0 20px rgba(0,0,0,0.12);
+      background: radial-gradient(ellipse 85% 75% at 50% 45%, transparent 40%, rgba(0,0,0,0.18) 100%);
+    }
+    .shot img {
+      width: 100%;
+      height: auto;
+      max-height: min(56vh, 500px);
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--radius);
+      filter: contrast(1.06) saturate(1.08) brightness(1.02);
+    }
+    .intro {
+      max-width: 40rem;
+      padding: 1.4rem 0 1.8rem;
+    }
+    h1 {
+      font-size: clamp(1.85rem, 7.2vw, 3.3rem);
+      line-height: 1.08;
+      margin-top: 0.4rem;
+      letter-spacing: -0.015em;
+    }
+    .intro > p {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 3.3vw, 1rem);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+      margin-top: 1.3rem;
+    }
+    .actions .call {
+      min-height: 2.8rem;
+      padding-inline: 1.15rem;
+    }
+    .actions .meta {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    section.block { border-top: 1px solid var(--line); }
+    .split {
+      display: grid;
+      gap: 1.5rem;
+      padding: 2.6rem 0;
+      align-items: center;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 5.2vw, 2.3rem);
+      line-height: 1.12;
+      margin-top: 0.45rem;
+    }
+    .copy p {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 3.1vw, 1rem);
+    }
+    .around { padding: 2.6rem 0; }
+    .around .lead { max-width: 40rem; }
+    .mosaic { display: grid; gap: 0.85rem; margin-top: 1.5rem; }
+    .inside, .place, .terms, footer { padding: 2.6rem 0; }
+    .groups { display: grid; gap: 1.6rem; margin-top: 1.5rem; }
+    .groups article, .facts article {
+      border-top: 1px solid var(--line);
+      padding-top: 0.85rem;
+    }
+    h3 { font-size: clamp(1.2rem, 3.8vw, 1.5rem); }
+    ul.plain {
+      margin: 0.8rem 0 0; padding: 0;
+      list-style: none; color: var(--muted); font-size: 0.9rem;
+    }
+    ul.plain li + li { margin-top: 0.35rem; }
+    .place-grid { display: grid; gap: 1.5rem; }
+    .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .rows li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+    .rows span:last-child {
+      color: var(--muted); font-size: 0.86rem; text-align: right; flex: none;
+    }
+    .facts { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
+    .facts p { margin-top: 0.6rem; color: var(--muted); font-size: 0.9rem; }
+    footer .foot {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+    .phone {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: clamp(1.75rem, 7.5vw, 2.45rem);
+      line-height: 1.05;
+      text-decoration: none;
+    }
+
+    /* Dock */
+    .dock {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 30;
+      padding: 0.55rem 0.7rem calc(0.55rem + env(safe-area-inset-bottom, 0));
+      pointer-events: none;
+    }
+    .dock::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 6.2rem;
+      background: linear-gradient(
+        to top,
+        rgba(246, 243, 238, 0.95) 0%,
+        rgba(246, 243, 238, 0.5) 50%,
+        transparent 100%
+      );
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 100%);
+      pointer-events: none;
+    }
+    .dock-row {
+      position: relative;
+      display: flex;
+      gap: 0.5rem;
+      max-width: 26rem;
+      margin-inline: auto;
+      pointer-events: auto;
+    }
+    .dock .btn-wa {
+      flex: 2;
+      background: var(--wa);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      min-height: 3rem;
+      font-weight: 600;
+      font-size: 0.92rem;
+      gap: 0.4rem;
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25);
+    }
+    .dock .btn-wa:hover { background: var(--wa-dark); }
+    .dock .btn-max {
+      flex: 1;
+      background: var(--max);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      min-height: 3rem;
+      font-weight: 600;
+      font-size: 0.88rem;
+      gap: 0.35rem;
+      box-shadow: 0 4px 14px rgba(75, 123, 236, 0.25);
+    }
+    .dock .btn-max:hover { background: var(--max-dark); }
+    .dock .call svg { width: 1.15rem; height: 1.15rem; }
+    footer { padding-bottom: 6rem; }
+
+    dialog {
+      width: min(96vw, 72rem);
+      max-height: 92vh;
+      margin: auto;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    dialog::backdrop { background: color-mix(in srgb, var(--ink) 88%, transparent); }
+    dialog img {
+      width: 100%;
+      max-height: 92vh;
+      object-fit: contain;
+      background: var(--ink);
+      border-radius: var(--radius);
+      filter: contrast(1.06) saturate(1.08);
+    }
+
+    @media (min-width: 640px) {
+      :root { --header-h: 4rem; }
+      .call.desktop { display: inline-flex; }
+      .nav-right { gap: 0.35rem; }
+      .nav-right .call.desktop {
+        height: auto;
+        min-height: 2.5rem;
+        padding: 0 0.9rem;
+        margin-left: 0.35rem;
+        border-radius: var(--radius-sm);
+      }
+      .dock { display: none; }
+      footer { padding-bottom: 3rem; }
+      .shot img { max-height: min(64vh, 580px); }
+      .intro { padding: 1.8rem 0 2.4rem; }
+      .photo-menu a { font-size: 0.9rem; padding: 0.5rem 0.6rem; }
+    }
+    @media (min-width: 800px) {
+      .wrap { width: min(72rem, calc(100% - 2.5rem)); }
+      .split {
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 3rem;
+        padding: 4.25rem 0;
+      }
+      .split.flip .visual { order: 2; }
+      .split.flip .copy { order: 1; }
+      .mosaic { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .mosaic .wide { grid-column: 1 / -1; }
+      .groups { grid-template-columns: 1fr 1fr 1fr; }
+      .place-grid { grid-template-columns: 0.8fr 1.2fr; align-items: start; }
+      .facts { grid-template-columns: 1fr 1fr 1fr; }
+      footer .foot {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .inside, .place, .terms, .around { padding: 4.25rem 0; }
+      .shot {
+        width: fit-content;
+        max-width: 100%;
+        margin-inline: auto;
+      }
+      .shot img {
+        max-height: min(70vh, 680px);
+        object-fit: contain;
+        width: auto;
+        max-width: 100%;
+        margin-inline: auto;
+      }
+    }
+
+    body:has(dialog[open]) {
+      overflow: hidden;
+    }
+    section.block,
+    #top,
+    #studio,
+    #sleep,
+    #kitchen,
+    #table,
+    #bath,
+    #entry,
+    #around,
+    #inside,
+    #place,
+    #terms,
+    #contact {
+      scroll-margin-top: calc(var(--header-h) + 0.5rem);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .logo, .photo-menu, .terms-link, .inside-link { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar" id="header">
+    <div class="bar-row">
+      <a class="logo" href="#top">Солнцево студия</a>
+
+      <nav class="photo-menu" id="photo-menu" role="menu" aria-label="Разделы">
+        <a href="#sleep" role="menuitem">Сон</a>
+        <a href="#kitchen" role="menuitem">Кухня</a>
+        <a href="#table" role="menuitem">Вечер</a>
+        <a href="#bath" role="menuitem">Ванная</a>
+        <a href="#entry" role="menuitem">Прочее</a>
+      </nav>
+
+      <div class="nav-right">
+        <button type="button" id="photo-toggle" aria-expanded="false" aria-controls="photo-menu">Фото</button>
+        <a class="inside-link" href="#inside">Что внутри</a>
+        <a class="terms-link" href="#terms">Условия</a>
+        <a class="call desktop" href="https://wa.me/79093791591" target="_blank" rel="noopener" style="background:var(--wa);color:#fff">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a class="call desktop" href="https://max.ru/" target="_blank" rel="noopener" title="MAX · найдите по номеру +7 909 379-15-91" style="background:var(--max);color:#fff">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.05 2 11.05c0 2.72 1.28 5.18 3.36 6.9L4.1 21.5a.7.7 0 0 0 .95.82l4.55-1.55c.78.2 1.58.3 2.4.3 5.52 0 10-4.05 10-9.02S17.52 2 12 2zm0 16.2c-.72 0-1.42-.08-2.1-.25l-.32-.08-2.7.92.75-2.35-.22-.22C6.1 15.1 5.1 13.2 5.1 11.05c0-3.75 3.1-6.8 6.9-6.8s6.9 3.05 6.9 6.8-3.1 6.8-6.9 6.8z"/>
+            <circle cx="8.5" cy="11.05" r="1.15"/>
+            <circle cx="12" cy="11.05" r="1.15"/>
+            <circle cx="15.5" cy="11.05" r="1.15"/>
+          </svg>
+          MAX
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="wrap hero" id="studio">
+      <button class="shot" type="button" data-full="https://pomf2.lain.la/f/6mfnce8p.jpg" aria-label="Открыть крупно">
+        <img src="https://pomf2.lain.la/f/6mfnce8p.jpg" alt="Студия целиком" width="960" height="1280">
+      </button>
+      <div class="intro">
+        <p class="kicker">Студия · до 3 гостей · 4 500 ₽ / сутки</p>
+        <h1 class="serif">Светлая студия у метро Солнцево</h1>
+        <p>Для путешественников, транзита через Внуково, командировок, пар и семьи с ребёнком. Квартира выглядит так, как на фотографиях. Чистота, бесконтактное заселение в удобное время и отчётные документы.</p>
+        <div class="actions">
+          <a class="call" href="https://wa.me/79093791591" target="_blank" rel="noopener" style="background:var(--wa);color:#fff">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Написать в WhatsApp
+          </a>
+          <p class="meta">4 500 ₽ / сутки · 7 мин до метро · 15 мин до Внуково</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="sleep">
+      <div class="wrap split">
+        <button class="shot visual" type="button" data-full="https://pomf2.lain.la/f/rjr0vygt.jpg">
+          <img src="https://pomf2.lain.la/f/rjr0vygt.jpg" alt="Спальные места" width="1280" height="960">
+        </button>
+        <div class="copy">
+          <p class="kicker">Сон</p>
+          <h2 class="serif">Кровать и раскладное кресло</h2>
+          <p>Двуспальная кровать с ортопедическим матрасом и раскладное кресло 80×200 см. На каждого гостя — свежее бельё и комплект полотенец.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="kitchen">
+      <div class="wrap split flip">
+        <button class="shot visual" type="button" data-full="https://pomf2.lain.la/f/21pmj9gv.jpg">
+          <img src="https://pomf2.lain.la/f/21pmj9gv.jpg" alt="Кухня" width="1280" height="960">
+        </button>
+        <div class="copy">
+          <p class="kicker">Кухня</p>
+          <h2 class="serif">Можно готовить с утра</h2>
+          <p>Холодильник, плита, духовка, микроволновка, чайник, кофеварка и фильтр для воды. Посуда для готовки и сервировки на месте. Чай, кофе, сахар, соль, перец и масло уже есть.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="table">
+      <div class="wrap split">
+        <button class="shot visual" type="button" data-full="https://pomf2.lain.la/f/f3yqtvp4.jpg">
+          <img src="https://pomf2.lain.la/f/f3yqtvp4.jpg" alt="Стол и телевизор" width="960" height="1280">
+        </button>
+        <div class="copy">
+          <p class="kicker">Вечер</p>
+          <h2 class="serif">Стол у окна и телевизор</h2>
+          <p>Небольшой круглый стол, Smart TV и быстрый Wi-Fi. Кондиционер держит студию ровной по температуре.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="bath">
+      <div class="wrap split flip">
+        <button class="shot visual" type="button" data-full="https://pomf2.lain.la/f/cdi7tn33.jpg">
+          <img src="https://pomf2.lain.la/f/cdi7tn33.jpg" alt="Ванная" width="960" height="1280">
+        </button>
+        <div class="copy">
+          <p class="kicker">Ванная</p>
+          <h2 class="serif">Душ и стирка в квартире</h2>
+          <p>Душевая, раковина и стиральная машина. Шампунь, гель для душа, кондиционер для волос, мыло и стиральный порошок.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="entry">
+      <div class="wrap split">
+        <button class="shot visual" type="button" data-full="https://pomf2.lain.la/f/p2mai9ez.jpg">
+          <img src="https://pomf2.lain.la/f/p2mai9ez.jpg" alt="Прихожая" width="960" height="1280">
+        </button>
+        <div class="copy">
+          <p class="kicker">Заселение</p>
+          <h2 class="serif">Входите сами, в своё время</h2>
+          <p>Заселение бесконтактное — в любое удобное время, без встречи. У двери зеркало, банкетка и место для обуви.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="around">
+      <div class="wrap around">
+        <div class="lead">
+          <p class="kicker">Рядом</p>
+          <h2 class="serif">Двор, площадка и вид на район</h2>
+          <p class="muted" style="margin-top:1rem">В доме — кафе, пекарни, магазины, аптеки и салоны. Пешком торговый центр, ледовый дворец, парковые зоны и пруд. С балкона видно квартал днём и ночью.</p>
+        </div>
+        <div class="mosaic">
+          <button class="shot" type="button" data-full="https://pomf2.lain.la/f/qro6tpea.jpg">
+            <img src="https://pomf2.lain.la/f/qro6tpea.jpg" alt="Двор" width="960" height="1280">
+          </button>
+          <button class="shot" type="button" data-full="https://pomf2.lain.la/f/8xu9xj45.jpg">
+            <img src="https://pomf2.lain.la/f/8xu9xj45.jpg" alt="Вид с балкона" width="960" height="1280">
+          </button>
+          <button class="shot wide" type="button" data-full="https://pomf2.lain.la/f/bftmacge.jpg">
+            <img src="https://pomf2.lain.la/f/bftmacge.jpg" alt="Ночной вид" width="1280" height="960">
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="inside">
+      <div class="wrap inside">
+        <h2 class="serif">Что внутри</h2>
+        <div class="groups">
+          <article>
+            <h3 class="serif">Сон</h3>
+            <ul class="plain">
+              <li>Двуспальная кровать, ортопедический матрас</li>
+              <li>Раскладное кресло 80×200 см</li>
+              <li>Свежее бельё и полотенца каждому</li>
+            </ul>
+          </article>
+          <article>
+            <h3 class="serif">Техника</h3>
+            <ul class="plain">
+              <li>Wi-Fi, Smart TV, кондиционер</li>
+              <li>Стиральная и посудомоечная машины</li>
+              <li>Фен, утюг, гладильная доска, массажёр</li>
+              <li>Напольная и настенная сушилки</li>
+            </ul>
+          </article>
+          <article>
+            <h3 class="serif">Кухня</h3>
+            <ul class="plain">
+              <li>Холодильник, плита, духовка, микроволновка</li>
+              <li>Чайник, кофеварка, фильтр для воды</li>
+              <li>Посуда для готовки и сервировки</li>
+              <li>Чай, кофе, сахар, соль, перец, масло</li>
+            </ul>
+          </article>
+          <article>
+            <h3 class="serif">Ванная</h3>
+            <ul class="plain">
+              <li>Душевая зона</li>
+              <li>Шампунь, гель, кондиционер, мыло</li>
+              <li>Стиральный порошок</li>
+            </ul>
+          </article>
+          <article>
+            <h3 class="serif">Для гостей</h3>
+            <ul class="plain">
+              <li>Книжки и игрушки для детей</li>
+              <li>Стульчик-подставка</li>
+              <li>Мини-аптечка</li>
+              <li>Одноразовые тапочки</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="place">
+      <div class="wrap place">
+        <div class="place-grid">
+          <div>
+            <p class="kicker">Район</p>
+            <h2 class="serif">Солнцево, рядом с Внуково</h2>
+            <p class="muted" style="margin-top:1rem;font-size:.9rem">До метро «Солнцево» 4 минуты на транспорте, если не идти пешком. Прямая ветка до Парка Победы и Москва-Сити — без пересадок.</p>
+          </div>
+          <ul class="rows">
+            <li><span>Метро «Солнцево»</span><span>7 мин пешком</span></li>
+            <li><span>Аэропорт Внуково</span><span>15 мин</span></li>
+            <li><span>НПЦ им. В. Ф. Войно-Ясенецкого</span><span>10 мин пешком</span></li>
+            <li><span>Парк «Мещерский лес»</span><span>10 мин пешком</span></li>
+            <li><span>МГУ им. Ломоносова</span><span>15 мин</span></li>
+            <li><span>Парк Победы и Москва-Сити</span><span>20 мин без пересадок</span></li>
+            <li><span>МКАД, Боровское и Киевское шоссе</span><span>рядом</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="terms">
+      <div class="wrap terms">
+        <h2 class="serif">Условия</h2>
+        <div class="facts">
+          <article>
+            <h3 class="serif">Заезд и выезд</h3>
+            <p>С 14:00, выезд до 12:00. Раньше или позже — если договориться заранее.</p>
+          </article>
+          <article>
+            <h3 class="serif">Как попадаете</h3>
+            <p>Бесконтактное заселение. Отчётные документы предоставляем.</p>
+          </article>
+          <article>
+            <h3 class="serif">Стоимость</h3>
+            <p>4 500 ₽ за сутки. Депозит 4 000 ₽ — возвратный, отдаём в день выезда после уборки.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="block" id="contact">
+    <div class="wrap foot">
+      <div>
+        <p class="kicker">Связь</p>
+        <a class="serif phone" href="tel:+79093791591">+7 909 379-15-91</a>
+        <p class="muted" style="margin-top:.65rem;font-size:.9rem">Пишите в WhatsApp или MAX, чтобы забронировать даты.</p>
+      </div>
+      <p class="muted" style="font-size:.9rem">Студия в Солнцево · до 3 гостей · 4 500 ₽/сутки</p>
+    </div>
+  </footer>
+
+  <div class="dock">
+    <div class="dock-row">
+      <a class="call btn-wa" href="https://wa.me/79093791591" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a class="call btn-max" href="https://max.ru/" target="_blank" rel="noopener" title="MAX · +7 909 379-15-91">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C6.48 2 2 6.05 2 11.05c0 2.72 1.28 5.18 3.36 6.9L4.1 21.5a.7.7 0 0 0 .95.82l4.55-1.55c.78.2 1.58.3 2.4.3 5.52 0 10-4.05 10-9.02S17.52 2 12 2zm0 16.2c-.72 0-1.42-.08-2.1-.25l-.32-.08-2.7.92.75-2.35-.22-.22C6.1 15.1 5.1 13.2 5.1 11.05c0-3.75 3.1-6.8 6.9-6.8s6.9 3.05 6.9 6.8-3.1 6.8-6.9 6.8z"/>
+          <circle cx="8.5" cy="11.05" r="1.15"/>
+          <circle cx="12" cy="11.05" r="1.15"/>
+          <circle cx="15.5" cy="11.05" r="1.15"/>
+        </svg>
+        MAX
+      </a>
+    </div>
+  </div>
+
+  <dialog id="viewer">
+    <button type="button" id="viewer-close" aria-label="Закрыть">
+      <img id="viewer-img" alt="">
+    </button>
+  </dialog>
+  <script>
+    (function () {
+      var header = document.getElementById("header");
+      var photoToggle = document.getElementById("photo-toggle");
+
+      function setOpen(open) {
+        header.classList.toggle("is-open", open);
+        photoToggle.classList.toggle("is-active", open);
+        photoToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+
+      photoToggle.addEventListener("click", function (e) {
+        e.stopPropagation();
+        setOpen(!header.classList.contains("is-open"));
+      });
+
+      var photoMenu = document.getElementById("photo-menu");
+      if (photoMenu) {
+        photoMenu.addEventListener("click", function (e) {
+          if (e.target.closest("a")) setOpen(false);
+        });
+      }
+
+      document.addEventListener("click", function (e) {
+        if (!header.contains(e.target)) setOpen(false);
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") setOpen(false);
+      });
+
+      var dialog = document.getElementById("viewer");
+      var viewerImg = document.getElementById("viewer-img");
+      document.querySelectorAll("[data-full]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var img = button.querySelector("img");
+          viewerImg.src = button.getAttribute("data-full");
+          viewerImg.alt = img ? img.alt : "";
+          dialog.showModal();
+        });
+      });
+      document.getElementById("viewer-close").addEventListener("click", function () {
+        dialog.close();
+      });
+      dialog.addEventListener("click", function (event) {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.addEventListener("close", function () {
+        viewerImg.removeAttribute("src");
+      });
+    })();
+  </script>
+</body>
+</html>
